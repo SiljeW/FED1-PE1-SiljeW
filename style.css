@@ -35,7 +35,7 @@ header {
     flex-shrink: 0;
     width: 100%;
     height: 800px;
-    background: url(/images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg) lightgray 50% / cover no-repeat;
+    background: url(images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg) lightgray 50% / cover no-repeat;
 }
 
 .navbar {
@@ -254,7 +254,7 @@ button {
     display: flex;
     width: 100%;
     height: 720px;
-    background: url(/images/daniil-silantev-UIcBEy5TDTA-unsplash.jpg) lightgray 50% / cover no-repeat;
+    background: url(images/daniil-silantev-UIcBEy5TDTA-unsplash.jpg) lightgray 50% / cover no-repeat;
     justify-content: center;
     align-items: center;
     margin-bottom: 100px;
