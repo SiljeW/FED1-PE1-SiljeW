@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Interior Arch - Home page</title>
-        <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
+        <title>Interior Arch - My blog page</title>
+        <meta name="fa-audio-description" content="My blog page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
-        <link href="/style.css" rel="stylesheet">
+        <link href="../style.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>
+        <header class="post-index">
             <div class="navbar">
                 <nav>
                     <ul class="menu">
                         <li>
-                            <img src="/logos/Logo2.png" alt="Logo for interior Arch">
+                            <img src="../logos/Logo2.png" alt="Logo for interior Arch">
                         </li>
                         <li><a href="#">ABOUT</a></li>
                         <li><a href="#">BLOG</a></li>
@@ -26,12 +26,14 @@
                 </nav>
             </div>
         </header>
-        <main>
+        <main class="post-index-main">
             <div class="main-top-index">
-                
+                <h1>BLOG USERNAME</h1>
             </div>
-            <div class="main-middle">
-                <h1>Latest Posts</h1>
+            <div class="main-middle-index">
+                <div class="main-middle-header">
+                    <h2>Latest Posts</h2>
+                </div>
                 <div class="carousel-container">
                     <div class="carousel-view">
                         <button id="prev-btn" class="prev-btn">
@@ -53,10 +55,28 @@
                         </button>
                     </div>
                 </div>
-                <div class="main-bottom">
-                    <div class="main-bottom-content">
-                        <h2>Create Your Own Personal Blog</h2>
-                        <a href="account/register.html" class="button2">REGISTER</a>
+            </div>
+            <div class="blog-archive">
+                <div class="blog-archive-header">
+                    <h2>Blog Archive</h2>
+                </div>
+                <div class="blog-archive-container">
+                    <div class="blog-archive-view">
+                        <div id="blog-archive-items" class="blog-list">
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                            <img id="blog-item" class="blog-item" src="image-url"/>
+                        </div>
+                        <button id="load-more-btn" class="button1">LOAD MORE</button>
                     </div>
                 </div>
             </div>
@@ -66,7 +86,7 @@
                 <div class="footer-top">
                     <li><a href="#">T&C</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><img src="logos/Logo3.png" alt="Footer logo for Interior Arch"></li>
+                    <li><img src="../logos/Logo3.png" alt="Footer logo for Interior Arch"></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About</a></li>
                 </div>

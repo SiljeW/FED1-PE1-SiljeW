@@ -4,22 +4,22 @@
         <title>Interior Arch - Home page</title>
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
-        <link href="/style.css" rel="stylesheet">
+        <link href="../style.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>
+        <header class="edit-index">
             <div class="navbar">
                 <nav>
                     <ul class="menu">
                         <li>
-                            <img src="/logos/Logo2.png" alt="Logo for interior Arch">
+                            <img src="../logos/Logo2.png" alt="Logo for interior Arch">
                         </li>
                         <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">BLOG</a></li>
+                        <li><a href="/post/index.html">BLOG</a></li>
                         <li><a href="#">CONTACT</a></li>
                         <li><a href="/post/edit.html" class="mypage"></a>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="35" viewBox="0 0 30 35" fill="none">
@@ -30,15 +30,106 @@
                 </nav>
             </div>
         </header>
-        <main>
-            
+        <main class="edit-page">
+            <div class="edit-page-header">
+                <h1>My Posts</h1>
+            </div>
+            <div class="edit-container">
+                <div class="edit-nav">
+                    <li>DATE:</li>
+                    <li>TITLE:</li>
+                    <li>STATUS:</li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+                <div id="edit-list" class="edit-list">
+                    <li>DD/MM/YY</li>
+                    <li>Lorem Ipsum dolor</li>
+                    <li>Draft</li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+                <div id="edit-list" class="edit-list">
+                    <li>DD/MM/YY</li>
+                    <li>Lorem Ipsum dolor</li>
+                    <li>Draft</li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+                <div id="edit-list" class="edit-list">
+                    <li>DD/MM/YY</li>
+                    <li>Lorem Ipsum dolor</li>
+                    <li>Draft</li>
+                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+                <div class="pagination-container">
+                    <div class="pagination-content">
+                        <div class="pages">
+                            <button id="prev-btn-pag" class="prev-btn-pag">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                            <button id="1-btn" class="number-button">1</button>
+                            <button id="2-btn" class="number-button">2</button>
+                            <button id="3-btn" class="number-button">3</button>
+                            <button id="4-btn" class="number-button">4</button>
+                            <button id="5-btn" class="number-button">5</button>
+                            <button id="next-btn-pag" class="next-btn-pag">
+                                <i class="fa-solid fa-angle-right"></i>                            
+                            </button>
+                        </div>
+                        <div class="new-post">
+                            <button id="new-post" class="button1"><a href="#"></a>NEW POST</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-form-container">
+                <div class="blog-form">
+                    <div class="blog-form-box">
+                        <div class="blog-form-content">
+                            <h1>Blog Post</h1>
+                            <form action="#" method="post">
+                                <div class="input-field">
+                                    <input type="text" required>
+                                    <label>Title</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" required>
+                                    <label>Description</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" required>
+                                    <label>Author</label>
+                                </div>
+                                <div class="input-field">
+                                    <textarea id="message" name="message" rows="10" cols="40"></textarea>
+                                    <label>Text</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="file" required>
+                                    <label>Header image</label>
+                                    <button type="#" class="button4">Browse Files</button>
+                                </div>
+                                <div class="input-field">
+                                    <input type="file">
+                                    <label>Text image</label>
+                                    <button type="#" class="button4">Browse Files</button>
+                                </div>
+                                <button type="submit" class="button1">SAVE DRAFT</button> 
+                                <button type="submit" class="button2">PUBLISH</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
             <div class="footer-container">
                 <div class="footer-top">
                     <li><a href="#">T&C</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><img src="logos/Logo3.png" alt="Footer logo for Interior Arch"></li>
+                    <li><img src="../logos/Logo3.png" alt="Footer logo for Interior Arch"></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">About</a></li>
                 </div>
