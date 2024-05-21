@@ -122,6 +122,8 @@ header {
     transition: 0.2s ease;
 }
 
+/** INDEX **/
+
 main {
     display: flex;
     flex-direction: column;
@@ -179,6 +181,258 @@ main {
     align-items: center;
 }
 
+/** POST INDEX **/
+
+.post-index {
+    height: 300px;
+    background:#FFF;
+}
+
+.post-index .navbar {
+    height: 300px;
+}
+
+main.post-index-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-top-index {
+    display: flex;
+    width: 100vw;
+    height: 430px;
+    background: url(/images/phil-5i0GnoTTjSE-unsplash.jpg);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.main-middle-header {
+    width: 100vw;
+    background-color: #918868;
+    align-items: center;
+    text-align: center;
+}
+
+.blog-archive {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-archive-header h2 {
+    width: 100vw;
+    background-color: #918868;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.blog-archive-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.blog-archive-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 44px 0;
+}
+
+.blog-archive-view .blog-list {
+    max-width: 1440px;
+    width: 100%;
+    height: auto;
+    padding: 50px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-item {
+    display: flex;
+    padding-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    height: 255px;
+    width: 255px;
+    gap: 7px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+/** EDIT INDEX **/
+
+.edit-index {
+    height: 300px;
+    background:#FFF;
+}
+
+.edit-index .navbar {
+    height: 300px;
+}
+
+main.edit-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-page-header {
+    width: 100vw;
+    height: 162px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFF;
+    background-color: #8E4A49;
+}
+
+.edit-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    padding: 10px;
+}
+
+.edit-nav {
+    width: 100%;
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #121726;
+    color: #FFF;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.edit-nav li {
+    min-width: 200px;
+    display: inline-flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    height: 30px;
+}
+
+.edit-nav a {
+    color: #121726;
+    text-decoration: none;
+}
+
+.edit-container .edit-list {
+    width: 100%;
+    display: inline-flex;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.edit-list li {
+    min-width: 200px;
+    display: inline-flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    height: 30px;
+    border-radius: 10px;
+    border: 0.5px solid #606165;
+}
+
+
+.edit-list a .fa-regular.fa-pen-to-square,
+.edit-list a .fa-regular.fa-trash-can {
+    color: #8E4A49;
+    align-content: center;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.fa-pen-to-square,
+.fa-trash-can {
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.pagination-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.pagination-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.pages {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-self: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.prev-btn-pag,
+.next-btn-pag {
+    color: #121726;
+    background-color: #cdcdce;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    border-radius: 30px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.number-button {
+    color: #121726;
+    background-color: #cdcdce;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 30px;
+    align-self: center;
+    cursor: pointer;
+}
+
+
+.new-post .button1 {
+    display: flex;
+    width: 159px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Nunito;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
 button {
     border: none;
     cursor: pointer;
@@ -207,7 +461,7 @@ button {
 
 .carousel-view .item-list {
     max-width: 1440px;
-    width: 70vw;
+    width: 80vw;
     padding: 50px 10px;
     display: flex;
     gap: 48px;
