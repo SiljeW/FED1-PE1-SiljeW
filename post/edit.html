@@ -5,6 +5,7 @@
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
         <link href="../style.css" rel="stylesheet">
+        <script type="module" src="../home.mjs"></script>
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,107 +22,57 @@
                         <li><a href="#">ABOUT</a></li>
                         <li><a href="/post/index.html">BLOG</a></li>
                         <li><a href="#">CONTACT</a></li>
-                        <li><a href="/post/edit.html" class="mypage"></a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="35" viewBox="0 0 30 35" fill="none">
-                            <path d="M20.3571 9C20.3571 7.59104 19.7927 6.23978 18.7881 5.24349C17.7834 4.24721 16.4208 3.6875 15 3.6875C13.5792 3.6875 12.2166 4.24721 11.2119 5.24349C10.2073 6.23978 9.64286 7.59104 9.64286 9C9.64286 10.409 10.2073 11.7602 11.2119 12.7565C12.2166 13.7528 13.5792 14.3125 15 14.3125C16.4208 14.3125 17.7834 13.7528 18.7881 12.7565C19.7927 11.7602 20.3571 10.409 20.3571 9ZM6.42857 9C6.42857 6.74566 7.33163 4.58365 8.93908 2.98959C10.5465 1.39553 12.7267 0.5 15 0.5C17.2733 0.5 19.4535 1.39553 21.0609 2.98959C22.6684 4.58365 23.5714 6.74566 23.5714 9C23.5714 11.2543 22.6684 13.4163 21.0609 15.0104C19.4535 16.6045 17.2733 17.5 15 17.5C12.7267 17.5 10.5465 16.6045 8.93908 15.0104C7.33163 13.4163 6.42857 11.2543 6.42857 9ZM3.30134 31.3125H26.6987C26.1027 27.109 22.4598 23.875 18.0603 23.875H11.9397C7.54018 23.875 3.89732 27.109 3.30134 31.3125ZM0 32.5277C0 25.9867 5.34375 20.6875 11.9397 20.6875H18.0603C24.6562 20.6875 30 25.9867 30 32.5277C30 33.6168 29.1094 34.5 28.0112 34.5H1.98884C0.890625 34.5 0 33.6168 0 32.5277Z" fill="#8E4A49"/>
-                            </svg>
-                        </li>
+                        <li><a href="#" id="createPostBtn">NEW POST</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
-        <main class="edit-page">
-            <div class="edit-page-header">
-                <h1>My Posts</h1>
-            </div>
-            <div class="edit-container">
-                <div class="edit-nav">
-                    <li>DATE:</li>
-                    <li>TITLE:</li>
-                    <li>STATUS:</li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
-                </div>
-                <div id="edit-list" class="edit-list">
-                    <li>DD/MM/YY</li>
-                    <li>Lorem Ipsum dolor</li>
-                    <li>Draft</li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
-                </div>
-                <div id="edit-list" class="edit-list">
-                    <li>DD/MM/YY</li>
-                    <li>Lorem Ipsum dolor</li>
-                    <li>Draft</li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
-                </div>
-                <div id="edit-list" class="edit-list">
-                    <li>DD/MM/YY</li>
-                    <li>Lorem Ipsum dolor</li>
-                    <li>Draft</li>
-                    <a href="#"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
-                </div>
-                <div class="pagination-container">
-                    <div class="pagination-content">
-                        <div class="pages">
-                            <button id="prev-btn-pag" class="prev-btn-pag">
-                                <i class="fa-solid fa-angle-left"></i>
-                            </button>
-                            <button id="1-btn" class="number-button">1</button>
-                            <button id="2-btn" class="number-button">2</button>
-                            <button id="3-btn" class="number-button">3</button>
-                            <button id="4-btn" class="number-button">4</button>
-                            <button id="5-btn" class="number-button">5</button>
-                            <button id="next-btn-pag" class="next-btn-pag">
-                                <i class="fa-solid fa-angle-right"></i>                            
-                            </button>
+        <main class="post-container">
+            <div id="createPostModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeModal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </span>
+                    <h2>Create a New Post</h2>
+                    <form id="postForm">
+                        <div class="upper">
+                            <div class="title">
+                                <label class="postheading" for="postTitle">
+                                    Title
+                                </label>
+                                <input type="text" class="postTitle" id="postTitle" name="postTitle" autocomplete="off" required>
+                            </div>
+                            <div class="author">
+                                <label class="postheading" for="postAuthor">
+                                    Author
+                                </label>
+                                <input type="text" class="postAuthor" id="postAuthor" name="postAuthor" autocomplete="off" required>
+                            </div>
+                            <div class="category1">
+                                <label class="postheading" for="postCategory">
+                                    Category
+                                </label>
+                                <input type="text" class="postCategory" id="postCategory" name="postCategory" autocomplete="off" required>
+                            </div>
                         </div>
-                        <div class="new-post">
-                            <button id="new-post" class="button1"><a href="#"></a>NEW POST</button>
-                        </div>
-                    </div>
+                        <label class="postheading" for="postDescription">
+                            Description
+                        </label>
+                        <textarea class="postDescription" id="postDescription" name="postDescription" autocomplete="off" required></textarea>
+                        <button type="submit" id="postSubmitBtn" class="button2">Publish</button>
+                    </form>
                 </div>
             </div>
-            <div class="blog-form-container">
-                <div class="blog-form">
-                    <div class="blog-form-box">
-                        <div class="blog-form-content">
-                            <h1>Blog Post</h1>
-                            <form action="#" method="post">
-                                <div class="input-field">
-                                    <input type="text" required>
-                                    <label>Title</label>
-                                </div>
-                                <div class="input-field">
-                                    <input type="text" required>
-                                    <label>Description</label>
-                                </div>
-                                <div class="input-field">
-                                    <input type="text" required>
-                                    <label>Author</label>
-                                </div>
-                                <div class="input-field">
-                                    <textarea id="message" name="message" rows="10" cols="40"></textarea>
-                                    <label>Text</label>
-                                </div>
-                                <div class="input-field">
-                                    <input type="file" required>
-                                    <label>Header image</label>
-                                    <button type="#" class="button4">Browse Files</button>
-                                </div>
-                                <div class="input-field">
-                                    <input type="file">
-                                    <label>Text image</label>
-                                    <button type="#" class="button4">Browse Files</button>
-                                </div>
-                                <button type="submit" class="button1">SAVE DRAFT</button> 
-                                <button type="submit" class="button2">PUBLISH</button>
-                            </form>
-                        </div>
-                    </div>
+            <div id="postDetailModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeDetailModal">&#x00d7;</span>
+                    <h1 id="detailTitle"></h1>
+                    <span id="detailDate"></span>
+                    <p id="detailDescription"></p>
                 </div>
+            </div>
+            <div id="postCreatedMessage" class="post-message">
+                Post published!
             </div>
         </main>
         <footer>
