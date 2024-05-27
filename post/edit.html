@@ -4,7 +4,7 @@
         <title>Interior Arch - Home page</title>
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
-        <link href="../style.css" rel="stylesheet">
+        <link href="../edit.css" rel="stylesheet">
         <script type="module" src="../home.mjs"></script>
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +19,12 @@
                         <li>
                             <img src="../logos/Logo2.png" alt="Logo for interior Arch">
                         </li>
-                        <li><a href="#">ABOUT</a></li>
                         <li><a href="/post/index.html">BLOG</a></li>
-                        <li><a href="#">CONTACT</a></li>
                         <li><a href="#" id="createPostBtn">NEW POST</a></li>
                     </ul>
+                    <div class="edit-nav">
+                        <h1>My Blog Posts</h1>
+                    </div>
                 </nav>
             </div>
         </header>
@@ -54,9 +55,15 @@
                                 </label>
                                 <input type="text" class="postCategory" id="postCategory" name="postCategory" autocomplete="off" required>
                             </div>
+                            <div class="blog-image">
+                                <label class="blogimage" for="postImage">
+                                    Upload image
+                                </label>
+                                <input type="file" class="postImage" id="postImage" accept="image/*">
+                            </div>
                         </div>
                         <label class="postheading" for="postDescription">
-                            Description
+                            Blog text
                         </label>
                         <textarea class="postDescription" id="postDescription" name="postDescription" autocomplete="off" required></textarea>
                         <button type="submit" id="postSubmitBtn" class="button2">Publish</button>
@@ -67,12 +74,41 @@
                 <div class="modal-content">
                     <span class="close" id="closeDetailModal">&#x00d7;</span>
                     <h1 id="detailTitle"></h1>
+                    <p id="detailAuthor"></p>
                     <span id="detailDate"></span>
+                    <img id="detailImage" class="post-image">
                     <p id="detailDescription"></p>
                 </div>
             </div>
             <div id="postCreatedMessage" class="post-message">
                 Post published!
+            </div>
+            <div id="editPostModal" class="modal">
+                <div class="modal-content">
+                    <h3>Edit Post</h3>
+                    <form id="editPostForm">
+                        <input type="hidden" id="editPostId">
+                        <label class="postheading" for="editPostCategory">Category</label>
+                        <input type="text" id="editPostCategory" name="editPostCategory">
+    
+                        <label class="postheading" for="editPostTitle">Title</label>
+                        <input type="text" id="editPostTitle" name="editPostTitle">
+    
+                        <label class="postheading" for="editPostAuthor">Author</label>
+                        <input type="text" id="editPostAuthor" name="editPostAuthor">
+    
+                        <label for="editPostDescription" class="description-label">Blog text</label>
+                        <textarea id="editPostDescription" name="editPostDescription"></textarea>
+    
+                        <label class="blogimage" for="editPostImage">Upload new image</label>
+                        <input type="file" class="postImage" id="editPostImage" accept="image/*">
+
+                        <div class="editButtonAction">
+                            <button type="submit" class="button2">Save</button>
+                            <button type="button" class="button3" id="closeEditModal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </main>
         <footer>

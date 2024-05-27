@@ -5,8 +5,7 @@
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
         <link href="../style.css" rel="stylesheet">
-        <script type="module" src="../home.mjs"></script>
-        <script type="module" src="../scripts/register.mjs"></script>
+        <script src="../scripts/api/register.mjs" type="module"></script>
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +26,9 @@
                     </ul>
                 </nav>
             </div>
+            <div class="header-image">
+                <img src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg">
+            </div>
         </header>
         <main>
             <div class="login-container">
@@ -37,7 +39,7 @@
                         </div>
                         <div class="form-content">
                             <h4>REGISTER</h4>
-                            <form id="register-form">
+                            <form id="register-form" method="post" action="/auth/register">
                                 <div class="input-field">
                                     <input type="text" id="name" placeholder="name" required>
                                     <label>Write your name</label>
@@ -57,13 +59,13 @@
                                         <a href="#">Terms & Conditions</a>
                                     </label>
                                 </div>
+                                <div id="message" class="message"></div>
                                 <button type="submit">Register</button>
                                 <div class="bottom-link">
                                     Already have an account?
                                     <a href="login.html">Login</a>
                                 </div>
                             </form>
-                            <div id="message" class="message"></div>
                         </div>
                     </div>
                 </div>

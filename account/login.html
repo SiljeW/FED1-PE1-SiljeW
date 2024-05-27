@@ -5,8 +5,7 @@
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
         <link href="../style.css" rel="stylesheet">
-        <script type="module" src="../home.mjs"></script>
-        <script type="module" src="../scripts/register.mjs"></script>
+        <script src="../scripts/api/login.mjs" defer type="module"></script>
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +26,9 @@
                     </ul>
                 </nav>
             </div>
+            <div class="header-image">
+                <img src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg">
+            </div>
         </header>
         <main>
             <div class="login-container">
@@ -39,21 +41,21 @@
                             <h4>LOGIN</h4>
                             <form id="login-form">
                                 <div class="input-field">
-                                    <input type="text" id="email" placeholder="username" required>
+                                    <input type="email" id="email" placeholder="username" required>
                                     <label>Email</label>
                                 </div>
                                 <div class="input-field">
-                                    <input type="password" id="password" placeholder="password" required>
+                                    <input type="password" id="password" placeholder="password" autocomplete="current-password" required>
                                     <label>Password</label>
                                 </div>
                                 <a href="#" class="forgot-pass">Forgot password?</a>
+                                <div id="message" class="message"></div>
                                 <button type="submit">Login</button>
                                 <div class="bottom-link">
                                     Don't have an account?
                                     <a href="register.html">Register here!</a>
                                 </div>
                             </form>
-                            <div id="message" class="message"></div>
                         </div>
                     </div>
                 </div>
