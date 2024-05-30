@@ -4,30 +4,21 @@ import { doFetch } from "../doFetch.mjs";
 const action = "blog/posts";
 const method = "put";
 
-export async function updatedPost(postData) {
-    const updatePostURL = `${API_BASE_URL}${action}/${postData.id}`;
-    const token = load("token");
-
-    try {
-        const response = await doFetch(updatePostURL, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${user.accessToken}`
-            },
-            method,
-            body: JSON.stringify(postData)
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('error', errorData);
-            return;
-        }
-
-        const responseData = await response.json();
-        console.log('Post created successfully:', responseData);
-    } catch (error) {
-        console.error('error:', error);
+export async function updatePost(postData) {
+    if (!postData.id) {
+        throw new Error('Update requires a postID');
     }
+    const updatePostURL = `${API_BASE_URL}${action}/${postData.id}`;
+
+    const response = await doFetch(updatePostURL, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${user.accessToken}`
+        },
+        method,
+        body: JSON.stringify(postData)
+    })
+
+    return await response.JSON();
     
 }
