@@ -1,11 +1,16 @@
 import { load } from "./storage/index.mjs";
 
 export function headers() {
-    const token = load('token');
+    const userJSON = localStorage.getItem('user');
+        console.log(userJSON)
+        if (!userJSON) {
+            console.error('not logged in')
+        }
+        const user = JSON.parse(userJSON)
 
     return {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${user.accessToken}`
     }
 }
 
