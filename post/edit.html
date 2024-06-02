@@ -14,13 +14,17 @@
     <body>
         <header class="edit-index">
             <div class="navbar">
+                <input type="checkbox" id="toggle-menu">
+                <label for="toggle-menu" class="toggle-button">&#9776;</label>
                 <nav>
                     <ul class="menu">
                         <li>
                             <img src="../logos/Logo2.png" alt="Logo for interior Arch">
                         </li>
                         <li><a href="/post/index.html">BLOG</a></li>
-                        <li><a href="#" id="createPostBtn">NEW POST</a></li>
+                        <li>
+                            <button type="submit" id="createPostBtn" class="button2">NEW POST</button>
+                        </li>
                     </ul>
                     <div class="edit-nav">
                         <h1>My Blog Posts</h1>
@@ -41,31 +45,32 @@
                                 <label class="postheading" for="postTitle">
                                     Title
                                 </label>
-                                <input type="text" class="postTitle" id="postTitle" name="postTitle" autocomplete="off" required>
+                                <input type="text" class="postTitle" id="postTitle" name="title" autocomplete="off" required>
                             </div>
                             <div class="author">
                                 <label class="postheading" for="postAuthor">
                                     Author
                                 </label>
-                                <input type="text" class="postAuthor" id="postAuthor" name="postAuthor" autocomplete="off" required>
+                                <input type="text" class="postAuthor" id="postAuthor" name="author" autocomplete="off" required>
                             </div>
                             <div class="category1">
                                 <label class="postheading" for="postCategory">
                                     Category
                                 </label>
-                                <input type="text" class="postCategory" id="postCategory" name="postCategory" autocomplete="off" required>
+                                <input type="text" class="postCategory" id="postCategory" name="tags" autocomplete="off" required>
                             </div>
                             <div class="blog-image">
+                                <img src="https://picsum.photos/id/101/2621/1747" id="detailImage" style="display: none;"/>
                                 <label class="blogimage" for="postImage">
-                                    Upload image
+                                    Image URL
                                 </label>
-                                <input type="file" class="postImage" id="postImage" accept="image/*">
+                                <input type="url" class="postImage" name="media" id="postImage" accept="image/*">
                             </div>
                         </div>
                         <label class="postheading" for="postDescription">
                             Blog text
                         </label>
-                        <textarea class="postDescription" id="postDescription" name="postDescription" autocomplete="off" required></textarea>
+                        <textarea class="postDescription" id="postDescription" name="body" autocomplete="off" required></textarea>
                         <button type="submit" id="postSubmitBtn" class="button2">Publish</button>
                     </form>
                 </div>
@@ -78,30 +83,32 @@
                     <span id="detailDate"></span>
                     <img id="detailImage" class="post-image">
                     <p id="detailDescription"></p>
+                    <button type="submit" id="editPostBtn" class="edit-post">Edit</button>
                 </div>
             </div>
             <div id="postCreatedMessage" class="post-message">
                 Post published!
             </div>
+            
             <div id="editPostModal" class="modal">
                 <div class="modal-content">
                     <h3>Edit Post</h3>
                     <form id="editPostForm">
                         <input type="hidden" id="editPostId">
                         <label class="postheading" for="editPostCategory">Category</label>
-                        <input type="text" id="editPostCategory" name="editPostCategory">
+                        <input type="text" id="editPostCategory" name="tag">
     
                         <label class="postheading" for="editPostTitle">Title</label>
-                        <input type="text" id="editPostTitle" name="editPostTitle">
+                        <input type="text" id="editPostTitle" name="title">
     
                         <label class="postheading" for="editPostAuthor">Author</label>
-                        <input type="text" id="editPostAuthor" name="editPostAuthor">
+                        <input type="text" id="editPostAuthor" name="author">
     
                         <label for="editPostDescription" class="description-label">Blog text</label>
-                        <textarea id="editPostDescription" name="editPostDescription"></textarea>
+                        <textarea id="editPostDescription" name="body"></textarea>
     
                         <label class="blogimage" for="editPostImage">Upload new image</label>
-                        <input type="file" class="postImage" id="editPostImage" accept="image/*">
+                        <input type="file" class="postImage" name="media" id="editPostImage" accept="image/*">
 
                         <div class="editButtonAction">
                             <button type="submit" class="button2">Save</button>
@@ -121,36 +128,9 @@
                     <li><a href="#">About</a></li>
                 </div>
                 <div class="icons">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
-                        <g clip-path="url(#clip0_190_151)">
-                        <path d="M43 21.5C43 9.62461 33.3754 0 21.5 0C9.62461 0 0 9.62461 0 21.5C0 31.5781 6.94551 40.0438 16.3098 42.3701V28.0676H11.8754V21.5H16.3098V18.6697C16.3098 11.3547 19.6188 7.96172 26.8078 7.96172C28.1684 7.96172 30.5199 8.23047 31.4857 8.49922V14.4453C30.9818 14.3949 30.1 14.3613 28.9998 14.3613C25.4725 14.3613 24.1119 15.6967 24.1119 19.1652V21.5H31.133L29.9236 28.0676H24.1035V42.8404C34.7527 41.5555 43 32.4936 43 21.5Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_190_151">
-                        <rect width="43" height="43" fill="white"/>
-                        </clipPath>
-                        </defs>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="43" viewBox="0 0 39 43" fill="none">
-                        <g clip-path="url(#clip0_190_153)">
-                        <path d="M19.6959 11.8418C14.3545 11.8418 10.0461 16.1502 10.0461 21.4916C10.0461 26.8331 14.3545 31.1415 19.6959 31.1415C25.0373 31.1415 29.3457 26.8331 29.3457 21.4916C29.3457 16.1502 25.0373 11.8418 19.6959 11.8418ZM19.6959 27.7653C16.2441 27.7653 13.4223 24.9518 13.4223 21.4916C13.4223 18.0315 16.2357 15.218 19.6959 15.218C23.1561 15.218 25.9695 18.0315 25.9695 21.4916C25.9695 24.9518 23.1477 27.7653 19.6959 27.7653ZM31.9912 11.4471C31.9912 12.6985 30.9834 13.6979 29.7404 13.6979C28.4891 13.6979 27.4896 12.6901 27.4896 11.4471C27.4896 10.2042 28.4975 9.19634 29.7404 9.19634C30.9834 9.19634 31.9912 10.2042 31.9912 11.4471ZM38.3824 13.7315C38.2396 10.7165 37.551 8.04575 35.3422 5.84536C33.1418 3.64497 30.4711 2.9563 27.4561 2.80513C24.3486 2.62876 15.0348 2.62876 11.9273 2.80513C8.9207 2.9479 6.25 3.63657 4.04121 5.83696C1.83242 8.03735 1.15215 10.7081 1.00098 13.7231C0.824609 16.8305 0.824609 26.1444 1.00098 29.2518C1.14375 32.2668 1.83242 34.9375 4.04121 37.1379C6.25 39.3383 8.9123 40.027 11.9273 40.1782C15.0348 40.3545 24.3486 40.3545 27.4561 40.1782C30.4711 40.0354 33.1418 39.3467 35.3422 37.1379C37.5426 34.9375 38.2312 32.2668 38.3824 29.2518C38.5588 26.1444 38.5588 16.8389 38.3824 13.7315ZM34.368 32.586C33.7129 34.2321 32.4447 35.5002 30.7902 36.1637C28.3127 37.1463 22.4338 36.9196 19.6959 36.9196C16.958 36.9196 11.0707 37.1379 8.60156 36.1637C6.95547 35.5086 5.6873 34.2405 5.02383 32.586C4.04121 30.1084 4.26797 24.2295 4.26797 21.4916C4.26797 18.7538 4.04961 12.8665 5.02383 10.3973C5.67891 8.75122 6.94707 7.48306 8.60156 6.81958C11.0791 5.83696 16.958 6.06372 19.6959 6.06372C22.4338 6.06372 28.3211 5.84536 30.7902 6.81958C32.4363 7.47466 33.7045 8.74282 34.368 10.3973C35.3506 12.8749 35.1238 18.7538 35.1238 21.4916C35.1238 24.2295 35.3506 30.1168 34.368 32.586Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_190_153">
-                        <rect width="37.625" height="43" fill="white" transform="translate(0.875)"/>
-                        </clipPath>
-                        </defs>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="43" viewBox="0 0 38 43" fill="none">
-                        <g clip-path="url(#clip0_190_155)">
-                        <path d="M35.3125 2.6875H3.0541C1.57598 2.6875 0.375 3.90527 0.375 5.4002V37.5998C0.375 39.0947 1.57598 40.3125 3.0541 40.3125H35.3125C36.7906 40.3125 38 39.0947 38 37.5998V5.4002C38 3.90527 36.7906 2.6875 35.3125 2.6875ZM11.7465 34.9375H6.16992V16.9816H11.7549V34.9375H11.7465ZM8.9582 14.5293C7.16934 14.5293 5.7248 13.0764 5.7248 11.2959C5.7248 9.51543 7.16934 8.0625 8.9582 8.0625C10.7387 8.0625 12.1916 9.51543 12.1916 11.2959C12.1916 13.0848 10.7471 14.5293 8.9582 14.5293ZM32.6502 34.9375H27.0736V26.2031C27.0736 24.1203 27.0316 21.4412 24.1762 21.4412C21.2703 21.4412 20.8252 23.7088 20.8252 26.052V34.9375H15.2486V16.9816H20.5984V19.434H20.674C21.4215 18.023 23.2439 16.5365 25.9566 16.5365C31.6004 16.5365 32.6502 20.257 32.6502 25.0945V34.9375Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_190_155">
-                        <rect width="37.625" height="43" fill="white" transform="translate(0.375)"/>
-                        </clipPath>
-                        </defs>
-                    </svg>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
                 </div>
                 <div class="footer-bottom">
                     <p>&copy; 2024</p>

@@ -34,6 +34,18 @@ nav {
     width: 100%; 
 }
 
+.toggle-button {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 0;
+}
+
+#toggle-menu {
+    display: none;
+}
+
+
 .menu {
     width: 100%;
     display: flex;
@@ -108,8 +120,7 @@ nav {
 
 #createPostBtn {
     display: flex;
-    width: 140px;
-    padding: 5px 20px;
+    padding: 7px 20px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -169,32 +180,20 @@ main {
 
 
 .postImage {
-    display: none;
-}
-
-.blogimage {
+    color: #121726;
+    text-decoration: none;
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #8E4A49;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
 }
 
 
-.post-image {
+.blog-image img {
     width: 100%;
     max-height: 300px;
     object-fit: cover;
     margin: 10px 0;
 }
-
 
 .post-title {
     color: #121726;
@@ -344,6 +343,7 @@ main {
 .title input,
 .category1 input,
 .author input,
+.blog-image input,
 .postDescription {
     width: 100%;
     max-width: 100%;
@@ -445,6 +445,11 @@ main {
     background-color: #606165;
 }
 
+
+
+
+
+
 #editPostForm {
     display: flex;
     flex-direction: column;
@@ -476,7 +481,7 @@ main {
     justify-content: space-evenly;
 }
 
-.edit-post {
+.editPostBtn {
     background-color: #918868;
     padding: 8px 15px;
     border: none;
@@ -486,6 +491,11 @@ main {
     margin-top: 10px;
     transition: background-color 0.3s;
 }
+
+.editPostBtn:hover {
+    background-color: #606165;
+}
+
 
 .button2 {
     display: inline-flex;

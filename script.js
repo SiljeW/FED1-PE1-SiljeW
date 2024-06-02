@@ -1,5 +1,8 @@
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
+
+//document.addEventListener('DOMContentLoaded', function () {
     const createPostBtn = document.getElementById('createPostBtn');
     const createPostModal = document.getElementById('createPostModal');
     const closeModal = document.getElementById('closeModal');
@@ -28,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     createPostBtn.addEventListener('click', function () {
         createPostModal.style.display = 'flex';
     });
+    
 
     closeModal.addEventListener('click', function () {
         createPostModal.classList.add('fadeOut');
@@ -36,59 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
             createPostModal.classList.remove('fadeOut');
         }, 500);
     });
-
-    function generateID() {
-        return '_' + Math.random().toString(36).substr(2, 9);
-    }
-
-    function loadPosts() {
-        const posts = JSON.parse(localStorage.getItem('posts')) || [];
-        posts.forEach(post => {
-            displayPost(post);
-        });
-    }
-
-    function savePosts(posts) {
-        localStorage.setItem('posts', JSON.stringify(posts));
-    }
-
-    function displayPost(post) {
-        const newPost = document.createElement('div');
-        newPost.className = 'post-box';
-        newPost.innerHTML = `
-            <h1 class="post-title" data-id="${post.id}" data-title="${post.title}" data-date="${post.date}" data-description="${post.description}" data-author="${post.author}" data-image="${post.image}">
-                ${post.title}
-            </h1>
-            <h2 class="category">${post.category}</h2>
-            <h3 class="author">${post.author}</h3>
-            <span class="post-date">${post.date}</span>
-            <p class="post-description">${post.description.substring(0, 100)}...</p>
-            ${post.image ? `<img src="${post.image}" alt="Post Image" class="post-image">` : ''}
-            <button class="delete-post" data-id="${post.id}">Delete</button>
-            <span class="load-more" data-id="${post.id}">Load more</span>
-            <button class="edit-post" data-id="${post.id}">Edit</button>
-        `;
-
-        postContainer.insertBefore(newPost, postContainer.firstChild);
-    }
-
-    async function savePost(post) {
-        const userJSON = localStorage.getItem('user');
-        console.log(userJSON)
-        if (!userJSON) {
-            console.error('not logged in')
-        }
-        const user = JSON.parse(userJSON)
-        const response = await doFetch(`${API_BASE_URL}/blog/posts/sil_wal`, {
-            headers: {
-                'Authorization': `Bearer ${user.accessToken}`
-            },
-            method: 'POST',
-            body: JSON.stringify(post),
-        });
-
-        console.log(response);
-    }
+    
+    
 
     postForm.addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -106,82 +59,71 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         
-        
-        const currentDate = new Date();
-        const day = currentDate.getDate();
-        const month = currentDate.toLocaleString('default', { month: 'short' });
-        const year = currentDate.getFullYear();
-        const formattedDate = `${day} ${month} ${year}`;
-
-        const postId = generateID();
-
-        const newPost = {
-            title: 'My new post',
-            body: 'This is the body of the post',
-            tags: ['tag1', 'tag2'],
-            media: {
-                url: 'https://url.com/image.jpg',
-                alt: 'An image description'
-            }
-        };
-
-        if (postImageInput.files && postImageInput.files[0]) {
+        let postImageUrl = '';
+        if (postImageUrl.files && postImageInput.files[0]) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                newPost.image = e.target.result;
-
-                const posts = JSON.parse(localStorage.getItem('posts')) || [];
-                posts.push(newPost);
-                savePosts(posts);
-                savePost({
-                    title: postTitle,
-                    body: postDescription,
-                    media: {url: e.target.result, alt: ""}
-
-                })
-
-                displayPost(newPost);
-
-                const postCreatedMessage = document.getElementById('postCreatedMessage');
-                postCreatedMessage.style.display = 'block';
-
-                postForm.reset();
-
-                setTimeout(() => {
-                    postCreatedMessage.style.display = 'none';
-                }, 3000);
+                postImageUrl = e.target.result;
+                createPost(postCategory, postTitle, postAuthor, postDescription, postImageUrl);
             };
             reader.readAsDataURL(postImageInput.files[0]);
         } else {
-            savePost({
-                title: postTitle,
-                body: postDescription,
-
-            })
-            const posts = JSON.parse(localStorage.getItem('posts')) || [];
-            posts.push(newPost);
-            savePosts(posts);
-
-            displayPost(newPost);
-
-            const postCreatedMessage = document.getElementById('postCreatedMessage');
-            postCreatedMessage.style.display = 'block';
-
-            postForm.reset();
-
-            setTimeout(() => {
-                postCreatedMessage.style.display = 'none';
-            }, 3000);
+            createPost(postCategory, postTitle, postAuthor, postDescription, postImageUrl);
         }
     });
 
-    postImageInput.addEventListener('change', function () {
-        if (postImageInput.files && postImageInput.files[0]) {
-            blogImageLabel.textContent = postImageInput.files[0].name;
-        } else {
-            blogImageLabel.textContent = 'Upload image';
-        }
-    });
+    function createPost(postCategory, postTitle, postAuthor, postDescription, postImageUrl) {
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+
+        const postData = {
+            title: postTitle,
+            body: postDescription,
+            tags: [postCategory],
+            media: {
+                url: postImageUrl,
+                alt: `${postTitle} image`
+            }
+        };
+
+        createPost(postData).then((responseData) => {
+            if (responseData) {
+                addPostToDOM(responseData, formattedDate, postAuthor);
+            }
+        });
+
+        createPostModal.style.display = 'none';
+        postForm.reset();
+    }
+
+    function addPostToDOM(postData, date, author) {
+        const newPost = document.createElement('div');
+        newPost.className = 'post-box';
+        newPost.innerHTML = `
+            <h1 class="post-title" data-id="${postData.id}"
+                data-title="${postData.title}"
+                data-date="${date}"
+                data-description="${postData.body}">
+                ${postData.title}
+            </h1><br>
+            <h2 class="category">${postData.tags}</h2><br>
+            <h3 class="author">${author}</h3><br>
+            <span class="post-date">${date}</span>
+            <p class="post-description">
+                ${postData.body}...</p>
+            <button class="edit-post btn-style" data-id="${postData.id}">Edit</button>
+            <button class="delete-post" data-id="${postData.id}">Delete</button>
+            <span class="load-more" data-id="${postData.id}"
+                data-title="${postData.title}"
+                data-date="${date}"
+                data-description="${postData.body}">
+                Load more
+            </span>
+        `;
+
+        postContainer.insertBefore(newPost, postContainer.firstChild);
+    }
+
 
     postContainer.addEventListener('click', function (event) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
@@ -248,41 +190,93 @@ document.addEventListener('DOMContentLoaded', function () {
 
     editPostForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
         const postId = editPostId.value;
         const postCategory = editPostCategory.value;
         const postTitle = editPostTitle.value;
         const postAuthor = editPostAuthor.value;
         const postDescription = editPostDescription.value;
+        const postImageInput = editPostImageInput;
 
-        const posts = JSON.parse(localStorage.getItem('posts')) || [];
-        const postIndex = posts.findIndex(p => p.id === postId);
-
-        if (postIndex !== -1) {
-            const updatedPost = posts[postIndex];
-            updatedPost.category = postCategory;
-            updatedPost.title = postTitle;
-            updatedPost.author = postAuthor;
-            updatedPost.description = postDescription;
-
-            if (editPostImageInput.files && editPostImageInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    updatedPost.image = e.target.result;
-                    savePosts(posts);
-                    location.reload();
-                };
-                reader.readAsDataURL(editPostImageInput.files[0]);
-            } else {
-                savePosts(posts);
-                location.reload();
-            }
+        let postImageUrl = '';
+        if (postImageInput.files && postImageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                postImageUrl = e.target.result;
+                updatePost(postId, postCategory, postTitle, postAuthor, postDescription, postImageUrl);
+            };
+            reader.readAsDataURL(postImageInput.files[0]);
+        } else {
+            updatePost(postId, postCategory, postTitle, postAuthor, postDescription, postImageUrl);
         }
-
-        editPostModal.style.display = 'none';
     });
 
-    loadPosts();
+    function updatePost(postId, postCategory, postTitle, postAuthor, postDescription, postImageUrl) {
+        const updatedPosts = JSON.parse(localStorage.getItem('posts')) || [];
+        const postIndex = updatedPosts.findIndex(post => post.id === postId);
+
+        if (postIndex > -1) {
+            const post = updatedPosts[postIndex];
+            post.category = postCategory;
+            post.title = postTitle;
+            post.author = postAuthor;
+            post.description = postDescription;
+            if (postImageUrl) {
+                post.image = postImageUrl;
+            }
+
+            savePosts(updatedPosts);
+            refreshPosts();
+
+            editPostModal.style.display = 'none';
+            editPostForm.reset();
+        }
+    }
+
+    function savePosts(posts) {
+        localStorage.setItem('posts', JSON.stringify(posts));
+    }
+
+    function refreshPosts() {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        postContainer.innerHTML = '';
+        posts.forEach(post => addPostToDOM(post, post.date, post.author));
+    }
+
+    refreshPosts()
+
+    
 });
 
 
+const action = '/blog/posts';
+
+async function createPost(postData) {
+    const userJSON = localStorage.getItem('user');
+    console.log(userJSON)
+    if (!userJSON) {
+        console.error('not logged in')
+    }
+    const user = JSON.parse(userJSON)
+
+    
+    const createPostURL = `${API_BASE_URL}${action}${(user.name)}`;
+
+    try {
+        const response = await authFetch(createPostURL, {
+            method: 'POST',
+            body: JSON.stringify(postData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('error', errorData);
+            return;
+        }
+
+        const responseData = await response.json();
+        console.log('Post created successfully:', responseData);
+    } catch (error) {
+        console.error('error:', error);
+    }
+    
+}

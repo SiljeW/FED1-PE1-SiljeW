@@ -1,28 +1,36 @@
-import { API_BASE_URL } from "../../constants.mjs";
-import { doFetch } from "../doFetch.mjs";
+import { API_BASE_URL, API_BLOGPOSTS_URL } from "../../constants.mjs";
+import { authFetch } from "../authFetch.mjs";
 
-const action = "blog/posts";
-const method = "get";
 
-export async function getPost(id) {
+export async function getPost(name, id) {
     if(!id) {
         throw new Error('Get requires a postID');
     }
 
-    const getPostURL = `${API_BASE_URL}${action}/${id}`;
-    
-    const response = await doFetch(getPostURL)
+    const userJSON = localStorage.getItem('user');
+        console.log(userJSON)
+        if (!userJSON) {
+            console.error('not logged in')
+        }
+    const user = JSON.parse(userJSON)
 
-    return await response.json();
+    const getPostURL = `${API_BLOGPOSTS_URL}/${user.name}/${id}`;
+    
+    const response = await authFetch(getPostURL)
+
+    const post = await getPost();
 }
 
 
-export async function getPosts(postData) {
+export async function getAllPosts(id) {
+    if(!id) {
+        throw new Error('Get requires a postID');
+    }
 
-    const updatePostURL = `${API_BASE_URL}${action}`;
+    const updatePostURL = `${API_BLOGPOSTS_URL}/${id}`;
     
-    const response = await doFetch(updatePostURL)
-
-    return await response.json();   
+    const response = await authFetch(updatePostURL)
+ 
+    const posts = await getAllPosts();
 }
 
