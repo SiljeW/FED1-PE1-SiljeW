@@ -22,12 +22,12 @@ export async function getPost(name, id) {
 }
 
 
-export async function getAllPosts(id) {
+export async function getAllPosts() {
     if(!id) {
         throw new Error('Get requires a postID');
     }
 
-    const updatePostURL = `${API_BLOGPOSTS_URL}/${id}`;
+    const updatePostURL = `${API_BLOGPOSTS_URL}/${postId}`;
     
     const response = await authFetch(updatePostURL)
  

@@ -1,6 +1,7 @@
 import { API_BLOGPOSTS_URL } from "./constants.mjs";
 import { authFetch } from "./utils/authFetch.mjs";
 import { getAllPosts } from "./utils/posts/read.mjs";
+import { load } from "./utils/storage/index.mjs";
 
 document.addEventListener('DOMContentLoaded', async function () {
     const carouselContainer = document.getElementById('item-list');
@@ -17,15 +18,21 @@ document.addEventListener('DOMContentLoaded', async function () {
     let currentPostIndex = 0;
     let posts = [];
 
-    async function getAllPosts(id) {
+    async function fetchPosts() {
+        const user = load('user');
         try {
-            const response = await authFetch(API_BLOGPOSTS_URL);
+            const response = await fetch(`${API_BLOGPOSTS_URL}/${user.name}/${postId}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
             posts = data.posts;
+            if (!Array.isArray(posts)) {
+                throw new Error('Expected posts to be an array');
+            }
             displayPosts();
-
         }catch (error) { 
-            console.error('Error getching posts:', error);
+            console.error('Error fetching posts:', error);
         }
     }
 
@@ -47,6 +54,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function displayPosts() { 
         carouselContainer.innerHTML = '';
+        if (posts.length === 0) {
+            console.warn('No posts available to display');
+            return;
+        }
         posts.forEach(post => {
             const postElement = document.createElement('div');
             postElement.className = 'carousel-item';
@@ -61,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             carouselContainer.appendChild(postElement);
             
         });
+        updateCarousel();
     }
 
     function showPostDetails(post) {
