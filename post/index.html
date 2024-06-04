@@ -18,150 +18,34 @@
                 <label for="toggle-menu" class="toggle-button">&#9776;</label>
                 <nav>
                     <ul class="menu">
+                        <li><a href="../index.html">HOME</a></li>
                         <li>
-                            <img src="../logos/Logo2.png" alt="Logo for interior Arch">
+                            <a href="../index.html">
+                                <img src="../logos/Logo2.png" alt="Logo for interior Arch">
+                            </a>
                         </li>
-                        <li><a href="#">BLOG</a></li>
-                        <li><a href="edit.html">EDIT</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
         <main class="post-index-main">
-            <div class="post-container">
-                <div id="createPostModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" id="closeModal">
-                            <i class="fa-solid fa-xmark"></i>
-                        </span>
-                        <h2>Create a New Post</h2>
-                        <form id="postForm">
-                            <div class="upper">
-                                <div class="title">
-                                    <label class="postheading" for="postTitle">
-                                        Title
-                                    </label>
-                                    <input type="text" class="postTitle" id="postTitle" name="title" autocomplete="off" required>
-                                </div>
-                                <div class="author">
-                                    <label class="postheading" for="postAuthor">
-                                        Author
-                                    </label>
-                                    <input type="text" class="postAuthor" id="postAuthor" name="author" autocomplete="off" required>
-                                </div>
-                                <div class="category1">
-                                    <label class="postheading" for="postCategory">
-                                        Category
-                                    </label>
-                                    <input type="text" class="postCategory" id="postCategory" name="tags" autocomplete="off" required>
-                                </div>
-                                <div class="blog-image">
-                                    <img src="https://picsum.photos/id/101/2621/1747" id="detailImage" style="display: none;"/>
-                                    <label class="blogimage" for="postImage">
-                                        Image URL
-                                    </label>
-                                    <input type="url" class="postImage" name="media" id="postImage" accept="image/*">
-                                </div>
-                            </div>
-                            <label class="postheading" for="postDescription">
-                                Blog text
-                            </label>
-                            <textarea class="postDescription" id="postDescription" name="body" autocomplete="off" required></textarea>
-                            <button type="submit" id="postSubmitBtn" class="button2">Publish</button>
-                        </form>
-                    </div>
-                </div>
-                <div id="postDetailModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close" id="closeDetailModal">&#x00d7;</span>
-                        <h1 id="detailTitle"></h1>
-                        <p id="detailAuthor"></p>
-                        <span id="detailDate"></span>
-                        <img id="detailImage" class="post-image">
-                        <p id="detailDescription"></p>
-                    </div>
-                </div>
-                <div id="postCreatedMessage" class="post-message">
-                    Post published!
-                </div>
-                <div id="editPostModal" class="modal">
-                    <div class="modal-content">
-                        <h3>Edit Post</h3>
-                        <form id="editPostForm">
-                            <input type="hidden" id="editPostId">
-                            <label class="postheading" for="editPostCategory">Category</label>
-                            <input type="text" id="editPostCategory" name="tag">
-        
-                            <label class="postheading" for="editPostTitle">Title</label>
-                            <input type="text" id="editPostTitle" name="title">
-        
-                            <label class="postheading" for="editPostAuthor">Author</label>
-                            <input type="text" id="editPostAuthor" name="author">
-        
-                            <label for="editPostDescription" class="description-label">Blog text</label>
-                            <textarea id="editPostDescription" name="body"></textarea>
-        
-                            <label class="blogimage" for="editPostImage">Upload new image</label>
-                            <input type="file" class="postImage" name="media" id="editPostImage" accept="image/*">
-    
-                            <div class="editButtonAction">
-                                <button type="submit" class="button2">Save</button>
-                                <button type="button" class="button3" id="closeEditModal">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>  
+            <div id="blog-container">
+                <span class="blog-date" id="blogDate" name="date"></span>
+                <h1 class="blog-title" id="blogTitle" name="title"></h1>
+                <p class="blog-author" id="blogAuthor" name="author"></p>
+                <img src="../images/phil-5i0GnoTTjSE-unsplash.jpg" alt="image" name="media" class="blog-image" id="blogImage"></img>
+                <p class="blog-text" id="blogText" name="body"></p>
+                <button class="share" id="sharePost"><i class="fa-solid fa-share-nodes"></i></button>
+                <button class="like" id="likePost"><i class="fa-regular fa-heart"></i></button>
+                <button class="comment" id="sharePost"><i class="fa-regular fa-comment"></i></button>
             </div>
-            <div class="main-middle-index">
-                <div class="main-middle-header">
-                    <h2>Latest Posts</h2>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel-view">
-                        <button id="prev-btn" class="prev-btn">
-                            <i class="fa-solid fa-angle-left"></i>  
-                        </button>
-                        <div id="item-list" class="item-list">
-                            <div id="postDetailModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close" id="closeDetailModal">&#x00d7;</span>
-                                    <h1 id="detailTitle"></h1>
-                                    <p id="detailAuthor"></p>
-                                    <span id="detailDate"></span>
-                                    <img id="detailImage" class="post-image">
-                                    <p id="detailDescription"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <button id="next-btn" class="next-btn">
-                            <i class="fa-solid fa-angle-right"></i>                                  
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="blog-archive">
-                <div class="blog-archive-header">
-                    <h2>Blog Archive</h2>
-                </div>
-                <div class="blog-archive-container">
-                    <div class="blog-archive-view">
-                        <div id="blog-archive-items" class="blog-list">
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                            <img id="blog-item" class="blog-item" src="../images/maksym-ostrozhynskyy-w6OniVDCfn0-unsplash.jpg"/>
-                        </div>
-                        <button id="load-more-btn" class="button1">LOAD MORE</button>
-                    </div>
-                </div>
+            <div class="button-action">
+                <button id="prev-btn" name="Previous" class="prev-btn">
+                    <i class="fa-solid fa-angle-left"></i>  
+                </button>
+                <button id="next-btn" name="Next" class="next-btn">
+                    <i class="fa-solid fa-angle-right"></i>                                  
+                </button>
             </div>
         </main>
         <footer>

@@ -60,7 +60,7 @@
                                 <input type="text" class="postCategory" id="postCategory" name="tags" autocomplete="off" required>
                             </div>
                             <div class="blog-image">
-                                <img src="https://picsum.photos/id/101/2621/1747" id="detailImage" style="display: none;"/>
+                                <img src="https://picsum.photos/id/101/2621/1747" id="detailImage"/>
                                 <label class="blogimage" for="postImage">
                                     Image URL
                                 </label>
@@ -81,15 +81,13 @@
                     <h1 id="detailTitle"></h1>
                     <p id="detailAuthor"></p>
                     <span id="detailDate"></span>
-                    <img id="detailImage" class="post-image">
+                    <img src="https://picsum.photos/id/101/2621/1747" id="detailImage" class="post-image">
                     <p id="detailDescription"></p>
-                    <button type="submit" id="editPostBtn" class="edit-post">Edit</button>
                 </div>
             </div>
             <div id="postCreatedMessage" class="post-message">
                 Post published!
             </div>
-            
             <div id="editPostModal" class="modal">
                 <div class="modal-content">
                     <h3>Edit Post</h3>
@@ -108,7 +106,7 @@
                         <textarea id="editPostDescription" name="body"></textarea>
     
                         <label class="blogimage" for="editPostImage">Upload new image</label>
-                        <input type="file" class="postImage" name="media" id="editPostImage" accept="image/*">
+                        <input type="url" class="postImage" name="media" id="editPostImage" accept="image/*">
 
                         <div class="editButtonAction">
                             <button type="submit" class="button2">Save</button>

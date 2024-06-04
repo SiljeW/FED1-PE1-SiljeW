@@ -166,6 +166,7 @@ main {
     border-radius: 5px; 
     text-align: center; 
     padding: 15px; 
+    overflow: hidden;
 } 
 
 .category {
@@ -188,7 +189,7 @@ main {
 }
 
 
-.blog-image img {
+.blog-image {
     width: 100%;
     max-height: 300px;
     object-fit: cover;
@@ -288,12 +289,15 @@ main {
 }
 
 
-.modal-content .post-image {
+.post-image {
     width: 100%;
     max-height: 300px;
     object-fit: cover;
 }
 
+#detailImage {
+    display: none;
+}
 
 .modal.fadeOut {
     animation: fadeOut 0.5s ease-in-out;
@@ -446,10 +450,6 @@ main {
 }
 
 
-
-
-
-
 #editPostForm {
     display: flex;
     flex-direction: column;
@@ -481,7 +481,7 @@ main {
     justify-content: space-evenly;
 }
 
-.editPostBtn {
+.edit-post {
     background-color: #918868;
     padding: 8px 15px;
     border: none;
@@ -492,7 +492,7 @@ main {
     transition: background-color 0.3s;
 }
 
-.editPostBtn:hover {
+.edit-post:hover {
     background-color: #606165;
 }
 

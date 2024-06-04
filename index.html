@@ -5,7 +5,7 @@
         <meta name="fa-audio-description" content="The home page to the Interior Arch web app">
         <meta name="viewport" content="width=device-width, initial scale=1">
         <link href="style.css" rel="stylesheet">
-        <script type="module" src="home.mjs"></script>
+        <script type="module" src="scripts/index.mjs"></script>
         <script src="https://kit.fontawesome.com/28f0a6b7dc.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,8 @@
                             <a href="index.html"><img src="logos/Logo2.png" alt="Logo for interior Arch"></a>
                         </li>
                         <li><a href="post/index.html">BLOG</a></li>
-                        <li><a href="account/login.html" class="button1">LOGIN</a></li>
+                        <li><a href="account/login.html" data-user-state="guest" class="login-btn">Login</a></li>
+                        <li><a href="#" data-user-state="logged in" class="login-btn">Logout</a></li>
                     </ul>
                 </nav>
             </div>
@@ -31,39 +32,46 @@
             </div>
         </header>
         <main>
-            <div class="main-top">
-                <div class="main-topimg1">
-                    <img src="logos/Logo.png" alt="interior arch logo">
+            <div class="main-middle-index">
+                <div class="main-middle-header">
+                    <h2>Latest Posts</h2>
                 </div>
-            </div>
-            <div class="main-middle">
-                <h1>Top Viewed Blog Posts:</h1>
                 <div class="carousel-container">
                     <div class="carousel-view">
                         <button id="prev-btn" class="prev-btn">
-                            <i class="fa-solid fa-angle-left"></i>
+                            <i class="fa-solid fa-angle-left"></i>  
                         </button>
                         <div id="item-list" class="item-list">
-                            <img id="item" class="item" src="image-url"/>
-                            <div id="postDetailModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close" id="closeDetailModal">&#x00d7;</span>
-                                    <h1 id="detailTitle"></h1>
-                                    <p id="detailAuthor"></p>
-                                    <span id="detailDate"></span>
-                                    <img id="detailImage" class="post-image">
-                                    <p id="detailDescription"></p>
-                                </div>
-                            </div>
-                            <img id="item" class="item" src="image-url"/>
-                            <img id="item" class="item" src="image-url"/>
-                            <img id="item" class="item" src="image-url"/>
-                            <img id="item" class="item" src="image-url"/>
+                            
                         </div>
                         <button id="next-btn" class="next-btn">
-                            <i class="fa-solid fa-angle-right"></i>                             
+                            <i class="fa-solid fa-angle-right"></i>                                  
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="blog-archive">
+                <div class="blog-archive-header">
+                    <h2>Blog Archive</h2>
+                </div>
+                <div class="blog-archive-container">
+                    <div class="blog-archive-view">
+                        <div id="blog-archive-items" class="blog-list">
+                            
+                        </div>
+                        <button id="load-more-btn" class="button1">LOAD MORE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="postDetailModal" class="modal">
+                <div class="modal-content">
+                    <h1 class="post-title" id="detailTitle"></h1>
+                    <p class="post-author" id="detailAuthor"></p>
+                    <span class="post-date" id="detailDate"></span>
+                    <img src="images/phil-5i0GnoTTjSE-unsplash.jpg" id="detailImage" class="post-image">
+                    <p class="post-body" id="detailDescription"></p>
+                    <button type="button" class="read-more" id="readMore">Read More</button>
                 </div>
             </div>
         </main>

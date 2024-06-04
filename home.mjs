@@ -44,105 +44,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         }, 500);
     });
 
-    function generateID() {
-        return '_' + Math.random().toString(36).substr(2, 9);
-    }
-
-    async function loadPosts() {
-        var user = load('user');
-        if (user) {
-            var response = await doFetch(getBlogPostUrl(user.name));
-            const posts = response.data;
-            posts.forEach(post => {
-                displayPost(post);
-            });
-        }
-    }
-
-    postForm.addEventListener('submit', async function (event) {
-        event.preventDefault();
-        const postCategory = document.getElementById('postCategory').value;
-        const postTitle = document.getElementById('postTitle').value;
-        const postAuthor = document.getElementById('postAuthor').value;
-        const postDescription = document.getElementById('postDescription').value;
-        const postImageUrl = document.getElementById('postImage');
-
-        if (postCategory.trim() === '' || 
-            postTitle.trim() === '' ||
-            postAuthor.trim() === '' ||
-            postDescription.trim() === '') {
-            alert('Please fill out all fields.');
-            return;
-        }
-
-        createAndSavePost(postCategory, postTitle, postAuthor, postDescription, postImageUrl);
-        
-    });
-
-    async function createAndSavePost(postCategory, postTitle, postAuthor, postDescription, postImageUrl) {
-        const currentDate = new Date();
-        const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
-
-        const postData = {
-            title: postTitle,
-            body: postDescription,
-            date: formattedDate,
-            author: postAuthor,
-            tags: [postCategory],
-            media: {
-                url: 'https://picsum.photos/id/108/2000/1333',
-                alt: `${postTitle} image`
-            }
-        };
-
-        const user = load('user');
-        try {
-            const response = await authFetch(getBlogPostUrl(user.name));
-            if (response) {
-                const post = {
-                    id: response.id,
-                    title: postTitle,
-                    body: postDescription,
-                    tag: postCategory,
-                    author: postAuthor,
-                    date: formattedDate,
-                    media: postImageUrl
-                };
-                savePostToLocalStorage(post);
-                addPostToDOM(post);
-            }
-        } catch (error) {
-            console.error('Error creating post:', error)
-        }
-
-        createPostModal.style.display = 'none';
-        postForm.reset();
+    function loadPostsFromLocalStorage() {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts.forEach(post => {
+            displayPost(post);
+        });
     }
 
     function savePostToLocalStorage(post) {
         const posts = JSON.parse(localStorage.getItem('posts')) || [];
         posts.push(post);
         localStorage.setItem('posts', JSON.stringify(posts));
-    }
-
-    function displayPost(post) {
-        const newPost = document.createElement('div');
-        newPost.className = 'post-box';
-        newPost.innerHTML = `
-            <h1 class="post-title" data-id="${post.id}" data-title="${post.title}" data-date="${post.date}" data-description="${post.body}" data-author="${post.author}">
-                ${post.title}
-            </h1>
-            <h2 class="category">${post.tag}</h2>
-            <h3 class="author">${post.author}</h3>
-            <span class="post-date">${post.date}</span>
-            <p class="post-description">${post.body}...</p>
-            <button class="delete-post" data-id="${post.id}">Delete</button>
-            <button class="edit-post" data-id="${post.id}">Edit</button>
-            <span class="load-more" data-id="${post.id}">Load more</span>
-            
-        `;
-
-        postContainer.insertBefore(newPost, postContainer.firstChild);
     }
 
     function addPostToDOM(post) {
@@ -165,6 +77,100 @@ document.addEventListener('DOMContentLoaded', async function () {
         postContainer.insertBefore(newPost, postContainer.firstChild);
     }
 
+    function displayPost(post) { 
+        if (!document.querySelector(`.post-box[data-id="${post.id}"]`)) {
+            addPostToDOM(post);
+        }
+    }
+
+    async function loadPosts() {
+        var user = load('user');
+        
+        if (user) {
+            var response = await doFetch(getBlogPostUrl(user.name));
+            const posts = response.data;
+            posts.forEach(post => {
+                savePostToLocalStorage(post);
+                displayPost(post);
+            });
+        }
+    }
+
+    loadPostsFromLocalStorage();
+    loadPosts();
+
+    postForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const postCategory = document.getElementById('postCategory').value;
+        const postTitle = document.getElementById('postTitle').value;
+        const postAuthor = document.getElementById('postAuthor').value;
+        const postDescription = document.getElementById('postDescription').value;
+        const postImageUrl = document.getElementById('postImage');
+
+        if (postCategory.trim() === '' || 
+            postTitle.trim() === '' ||
+            postAuthor.trim() === '' ||
+            postDescription.trim() === '') {
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        await createAndSavePost(postCategory, postTitle, postAuthor, postDescription, postImageUrl);
+        
+    });
+
+    async function createAndSavePost(postCategory, postTitle, postAuthor, postDescription, postImageUrl) {
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+
+        const user = load('user');
+        const postData = {
+            title: postTitle,
+            body: postDescription,
+            date: formattedDate,
+            tags: [postCategory],
+            author: postAuthor,
+            media: {
+                url: 'https://picsum.photos/id/108/2000/1333',
+                alt: `${postTitle} image`
+            }
+        };
+        
+        try {
+            const response = await authFetch(`${API_BLOGPOSTS_URL}/${user.name}`, {
+                method: 'POST',
+                body: JSON.stringify(postData)
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                throw new Error(responseData.message || 'Failed to create post');
+            }
+
+            const postId = responseData.data.id;
+            const post = {
+                id: postId,
+                title: postTitle,
+                body: postDescription,
+                tag: postCategory,
+                author: postAuthor,
+                date: formattedDate,
+                media: postImageUrl
+            };
+            console.log(responseData);
+
+            savePostToLocalStorage(post);
+            addPostToDOM(post);
+        
+        } catch (error) {
+            console.error('Error creating post:', error)
+        }
+
+        createPostModal.style.display = 'none';
+        postForm.reset();
+    }
+
     postContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('load-more') ||
             event.target.classList.contains('post-title')) {
@@ -177,6 +183,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             detailAuthor.textContent = author;
             detailDate.textContent = date;
             detailDescription.textContent = description;
+            detailImage.
 
             postDetailModal.style.display = 'flex';
         }
@@ -196,7 +203,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function deletePost(postId) {
         const user = load('user');
         try {
-            const response = await authFetch(`${API_BLOGPOSTS_URL}/${user.name}/${postId}`, { // Replace with your API URL
+            const response = await authFetch(`${API_BLOGPOSTS_URL}/${user.name}/${postId}`, { 
                 method: 'DELETE'
             });
 
@@ -231,8 +238,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         if (postToEdit) {
             editPostId.value = postToEdit.id;
-            editPostTitle.value = postToEdit.title;
             editPostCategory.value = postToEdit.tag;
+            editPostTitle.value = postToEdit.title;
             editPostAuthor.value = postToEdit.author;
             editPostDescription.value = postToEdit.body;
             editPostImageInput.value = postToEdit.media;
@@ -261,25 +268,29 @@ document.addEventListener('DOMContentLoaded', async function () {
     editPostForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        const postTitle = editPostTitle.value;
+        const postId = editPostId.value;
         const postCategory = editPostCategory.value;
+        const postTitle = editPostTitle.value;
         const postAuthor = editPostAuthor.value;
         const postDescription = editPostDescription.value;
         const postImageUrl = editPostImageInput.value;
 
+
         try {
-            const user = load('user');
+            var user = load('user');
             const response = await authFetch(`${API_BLOGPOSTS_URL}/${user.name}/${postId}`, { 
                 method: 'PUT',
                 body: JSON.stringify({
                     title: postTitle,
-                    author: postAuthor,
                     body: postDescription,
                     tags: [postCategory],
+                    author: postAuthor,
+                    date: new Date().toISOString(),
                     media: {
                         url: postImageUrl,
                         alt: `${postTitle} image`
-                    }
+                    },
+                    
                 })
             });
 
@@ -316,13 +327,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             postElement.querySelector('.post-title').setAttribute('data-author', updatedPost.author);
             postElement.querySelector('.category').textContent = updatedPost.tag;
             postElement.querySelector('.author').textContent = updatedPost.author;
-            postElement.querySelector('.post-date').textContent = updatedPost.date;
+            postElement.querySelector('.post-date').textContent = new Date(updatedPost.updated).toLocaleDateString();
             postElement.querySelector('.post-description').textContent = updatedPost.body + '...';
         }
     }
 
     
-    await loadPosts();
 
     
 });

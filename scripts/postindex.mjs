@@ -1,113 +1,27 @@
-import { API_BLOGPOSTS_URL } from "./constants.mjs";
-import { authFetch } from "./utils/authFetch.mjs";
-import { getAllPosts } from "./utils/posts/read.mjs";
-import { load } from "./utils/storage/index.mjs";
 
-document.addEventListener('DOMContentLoaded', async function () {
-    const carouselContainer = document.getElementById('item-list');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const postDetailModal = document.getElementById('postDetailModal');
-    const closeDetailModal = document.getElementById('closeDetailModal');
-    const detailTitle = document.getElementById('detailTitle');
-    const detailAuthor = document.getElementById('detailAuthor');
-    const detailDate = document.getElementById('detailDate');
-    const detailImage = document.getElementById('detailImage');
-    const detailDescription = document.getElementById('detailDescription');
 
-    let currentPostIndex = 0;
-    let posts = [];
 
-    async function fetchPosts() {
-        const user = load('user');
-        try {
-            const response = await fetch(`${API_BLOGPOSTS_URL}/${user.name}/${postId}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            posts = data.posts;
-            if (!Array.isArray(posts)) {
-                throw new Error('Expected posts to be an array');
-            }
-            displayPosts();
-        }catch (error) { 
-            console.error('Error fetching posts:', error);
-        }
-    }
 
-    carouselContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('post-title')) {
-            const title = event.target.getAttribute('data-title');
-            const author = event.target.getAttribute('data-author');
-            const date = event.target.getAttribute('data-date');
-            const description = event.target.getAttribute('data-description');
+function getURLParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        title: params.get('title'),
+        date: params.get('date'),
+        author: params.get('author'),
+        body: params.get('body'),
+        image: params.get('image')
+    };
+}
 
-            detailTitle.textContent = title;
-            detailAuthor.textContent = author;
-            detailDate.textContent = date;
-            detailDescription.textContent = description;
+// Function to set blog post content
+function setBlogContent() {
+    const { title, date, author, body, image } = getURLParams();
+    document.getElementById('blogTitle').textContent = title;
+    document.getElementById('blogDate').textContent = date;
+    document.getElementById('blogAuthor').textContent = author;
+    document.getElementById('blogText').textContent = body;
+    document.getElementById('blogImage').src = `../images/${image}`;
+}
 
-            postDetailModal.style.display = 'flex';
-        }
-    })
-
-    function displayPosts() { 
-        carouselContainer.innerHTML = '';
-        if (posts.length === 0) {
-            console.warn('No posts available to display');
-            return;
-        }
-        posts.forEach(post => {
-            const postElement = document.createElement('div');
-            postElement.className = 'carousel-item';
-            postElement.innerHTML = `
-            <h3 class="post-title" data-id="${post.id}">${post.title}</h3>
-                <p class="post-author">${post.author}</p>
-                <span class="post-date">${new Date(post.date).toLocaleDateString()}</span>
-                <img src="${post.media.url}" alt="${post.media.alt}" class="post-image">
-                <p class="post-description">${post.body}</p>
-            `;
-            postElement.addEventListener('click', () => showPostDetails(post));
-            carouselContainer.appendChild(postElement);
-            
-        });
-        updateCarousel();
-    }
-
-    function showPostDetails(post) {
-        detailTitle.textContent = post.title;
-        detailAuthor.textContent = post.author;
-        detailDate.textContent = new Date(post.date).toLocaleDateString();
-        detailImage.src = post.media.url;
-        detailImage.alt = post.media.alt;
-        detailDescription.textContent = post.body;
-        postDetailModal.style.display = 'flex';
-
-    }
-
-    closeDetailModal.addEventListener('click', () => {
-        postDetailModal.style.display = 'none';
-    });
-
-    function updateCarousel() {
-        const items = document.querySelectorAll('.carousel-item');
-        items.forEach((item, index) => {
-            item.style.display = index === currentPostIndex? 'block' : 'none';
-        });
-    }
-
-    prevBtn.addEventListener('click', () => {
-        currentPostIndex = (currentPostIndex - 1) % posts.length;
-        updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        currentPostIndex = (currentPostIndex + 1) % posts.length;
-        updateCarousel();
-    });
-
-    await getAllPosts();
-    updateCarousel();
-
-})
+// Populate the blog content on page load
+window.onload = setBlogContent;
