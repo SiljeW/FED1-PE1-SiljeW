@@ -29,15 +29,20 @@
             </div>
         </header>
         <main class="post-index-main">
-            <div id="blog-container">
-                <span class="blog-date" id="blogDate" name="date"></span>
-                <h1 class="blog-title" id="blogTitle" name="title"></h1>
-                <p class="blog-author" id="blogAuthor" name="author"></p>
-                <img src="../images/phil-5i0GnoTTjSE-unsplash.jpg" alt="image" name="media" class="blog-image" id="blogImage"></img>
-                <p class="blog-text" id="blogText" name="body"></p>
+            <div id="postDetailsContainer">
+                <h1 id="detailTitle" class="post-title"></h1>
+                <p id="detailAuthor" class="post-author"></p>
+                <span id="detailDate" class="post-date"></span>
+                <img id="detailImage" class="post-image">
+                <p id="detailDescription" class="post-body"></p>
                 <button class="share" id="sharePost"><i class="fa-solid fa-share-nodes"></i></button>
                 <button class="like" id="likePost"><i class="fa-regular fa-heart"></i></button>
                 <button class="comment" id="sharePost"><i class="fa-regular fa-comment"></i></button>
+            </div>
+            <div id="blog-container">
+                <div class="blog-postitem">
+
+                </div>
             </div>
             <div class="button-action">
                 <button id="prev-btn" name="Previous" class="prev-btn">

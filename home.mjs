@@ -2,10 +2,6 @@ import { API_BASE_URL, API_BLOGPOSTS_URL, getBlogPostUrl } from "./scripts/const
 import { authFetch } from "./scripts/utils/authFetch.mjs";
 import { doFetch } from "./scripts/utils/doFetch.mjs";
 import { load } from "./scripts/utils/storage/index.mjs";
-import { remove } from "./scripts/utils/storage/index.mjs";
-import { createPost } from "./scripts/utils/posts/create.mjs";
-import { updatePost } from "./scripts/utils/posts/update.mjs";
-import { getPost } from "./scripts/utils/posts/read.mjs";
 
 document.addEventListener('DOMContentLoaded', async function () {
     const createPostBtn = document.getElementById('createPostBtn');
@@ -67,6 +63,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             <h2 class="category">${post.tag}</h2>
             <h3 class="author">${post.author}</h3>
             <span class="post-date">${post.date}</span>
+            <img src="${post.media?.url || 'https://picsum.photos/id/101/2621/1747'}" alt="${post.media?.alt || 'Post image'}" class="post-image">
             <p class="post-description">${post.body}...</p>
             <button class="delete-post" data-id="${post.id}">Delete</button>
             <button class="edit-post" data-id="${post.id}">Edit</button>

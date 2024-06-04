@@ -8,6 +8,7 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+
 h1 {
     font-size: 64px;
     font-weight: 100;
@@ -92,10 +93,6 @@ h5 {
     height: auto;
 }
 
-.menu li .button1 {
-    color: #FFF;
-}
-
 .menu a:hover {
     text-decoration: underline;
 }
@@ -117,6 +114,7 @@ h5 {
     display: flex;
     width: 140px;
     padding: 5px 20px;
+    font-size: 1.50em;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -168,50 +166,24 @@ main {
     margin: 0px 80px 0px 80px;
     justify-content: center;
     align-items: center;
-    padding: 100px 20px;
+    padding: 20px 20px;
 }
 
-.main-top {
+.main-top-image {
     display: inline-flex;
     flex-direction: column;
-    max-width: 640px;
+    max-width: 50%;
     height: auto;
     justify-content: center;
     align-items: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    gap: 85px;
 }
 
-.main-topimg1,
-.main-topimg2,
-.main-topimg3 {
-    display: block;
+.main-top-image img {
     width: 100%;
     height: auto;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-} 
-
-.main-topimg1 img {
-    width: 100%;
-    height: 372px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
-.main-topimg2 img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.main-topimg3 img {
-    width: 100%;
-    height: 480px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
 
 .main-middle {
     display: flex;
@@ -220,7 +192,18 @@ main {
     align-items: center;
 }
 
+.main-middle-header h2 {
+    margin: 0;
+    width: 100%;
+}
+
 .carousel-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -229,6 +212,8 @@ main {
 .carousel-view {
     display: flex;
     align-items: center;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
 }
 
 .prev-btn, .next-btn {
@@ -246,19 +231,102 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-width: 80%;
-    height: 400px;
+    height: 50vh;
     margin: 0 15px;
-    background-color: #f4f4f4;
+    background-color: #FFF;
+    border: 0.2px solid #121726;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);;
     padding: 20px;
-    border-radius: 10px;
     text-align: center;
+}
+
+.carousel-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
 }
 
 .post-image {
     width: 100%;
     height: auto;
+}
+
+.carousel-item .post-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.carousel-item .post-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
+.carousel-item .post-author {
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+
+.carousel-item .post-description {
+    height: 100px;
+    max-width: 80%;
+    background: -webkit-linear-gradient(#333, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.carousel-container .hidden {
+    display: none;
+}
+
+.carousel-container .prev-slide,
+.carousel-container .next-slide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-container .prev-slide {
+    left: 0;
+}
+
+.carousel-container .next-slide {
+    right: 0;
+}
+
+
+.read-more {
+    display: inline-flex;
+    padding: 5px 20px;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
+    gap: 10px;
+    background-color: #121726;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: normal;
+    cursor: pointer;
+}
+
+.read-more:hover {
+    background-color: #606165;
+    border: 0.5px solid #121726;
+    transform: scale(1.05);
+    transition: 0.2s ease;
 }
 
 .blog-archive-container {
@@ -325,9 +393,6 @@ main {
     font-style: italic;
 }
 
-.read-more {
-    margin-top: 20px;
-}
 
 /** POST INDEX **/
 
@@ -340,24 +405,17 @@ main {
     height: 300px;
 }
 
-main.post-index-main {
+.post-index-main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 0 80px;
 }
 
-.main-top-index {
-    display: flex;
-    width: 100vw;
-    height: 430px;
-    background: url(/images/phil-5i0GnoTTjSE-unsplash.jpg);
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+
 .main-middle-header {
     width: 100vw;
-
     align-items: center;
     text-align: center;
 }
@@ -372,6 +430,7 @@ main.post-index-main {
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .blog-archive-container {
@@ -405,16 +464,51 @@ main.post-index-main {
     justify-content: center;
 }
 
-.blog-item {
+.archive-item {
     display: flex;
     padding-top: 10px;
     flex-direction: column;
     align-items: center;
-    height: 255px;
+    justify-content: space-evenly;
+    height: auto;
     width: 255px;
     gap: 7px;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
 
+.archive-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.50);
+}
+
+.archive-item .post-title {
+    font-size: 1.8em;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: normal;
+}
+
+.archive-item .post-author {
+    line-height: normal;
+    text-transform: capitalize;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.archive-item .post-image {
+    border-radius: 0;
+    margin-bottom: 0;
+    opacity: 0.5;
+}
+
+.archive-item .post-date {
+    font-size: 0.8em;
+    color: #8E4A49;
+    font-style: italic;
+    margin-bottom: 5px;
 }
 
 /** POST INDEX **/
@@ -661,7 +755,15 @@ main.post-container {
     transform: scale(1.1, 1.1);
 }
 
+.post-details-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
 
+#detailTitle {
+    align-items: center;
+}
 
 @media only screen and (max-width: 700px) {
 
@@ -760,14 +862,7 @@ button {
     transition: all .3s ease-in-out;
 }
 
-.carousel-container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-}
+
 
 .carousel-view {
     display: flex;
@@ -783,7 +878,6 @@ button {
     width: 80vw;
     padding: 50px 10px;
     display: flex;
-    gap: 48px;
     scroll-behavior: smooth;
     transition: all 0.25s ease-in;
     -ms-overflow-style: none;
@@ -791,7 +885,6 @@ button {
     overflow: auto;
     scroll-snap-type: x mandatory;
 }
-
 
 
 .item {

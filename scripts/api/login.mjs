@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem("user", JSON.stringify({ name: user.data.name, email, accessToken: user.data.accessToken }));
             setTimeout(() => {
                 console.log(user)
-                window.location.href = '/post/index.html'
+                window.location.href = '/post/edit.html'
             }, 1000);
         } else {
             showMessage('Invalid username or password.');
