@@ -1,6 +1,6 @@
 # FED1 Project Exam 1
 
-![file](file:///Users/siljewalmann/Desktop/Skjermbilde%202024-06-05%20kl.%2015.01.03.png)
+![image]((https://siljew.github.io/FED1-PE1-SiljeW/logos/Logo.png))
 
 A blog platform for Interior Architecture enthusiasts!
 
